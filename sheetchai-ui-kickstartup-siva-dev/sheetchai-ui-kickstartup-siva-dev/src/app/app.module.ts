@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { TeaminfoComponent } from './views/teaminfo/teaminfo.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
