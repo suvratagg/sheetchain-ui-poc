@@ -1,0 +1,49 @@
+<div style="margin-left: 150px;margin-right: 150px;">
+  <div class="row">
+    <div class="col-md-4">
+      <a routerLink="/team-info/{{teamname}}">
+        <!-- <h2>Team {{teamname}}</h2> -->
+        <button type="button" class="btn btn-outline-success" (click)="handleUpdate()">The Team</button>
+      </a>
+      <br>
+      <li class="list-group-item">Version History</li>
+      <ul class="list-group" *ngFor="let commit of commits">
+        <li class="list-group-item">{{commit}}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <div class="d-flex align-items-end flex-column">
+        <div>
+          <button type="button" class="btn btn-outline-success" (click)="handleCommit()">Commit File</button>
+          &nbsp; &nbsp;
+          <button type="button" class="btn btn-outline-success" (click)="handleUpdate()">Update File</button>
+        </div>
+        <br>
+        <div class="col-md-8">
+        <div>
+          <div style="width: 600px;" *ngIf="showUpload">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text upload" (click)="upload()" id="btnUpload">Upload</span>
+              </div>
+              <div class="custom-file">
+                <form action="/api/upload" method="post" enctype="multipart/form-data">
+                  <input (change)="fileChange($event)" type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+                </form>
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- <div align="right" id="uploadfinalfile" style="display: none;">
+    <div class="form-group">
+      <input class="btn btn-outline-success" type="file" id="commitfile">
+    </div>
+  </div> -->
+  </div>
+</div>
