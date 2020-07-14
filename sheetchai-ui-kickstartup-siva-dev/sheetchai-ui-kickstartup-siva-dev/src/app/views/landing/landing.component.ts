@@ -14,7 +14,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
   };
-
+  data: { fileHash: string; fileName: string; };
 	uploadedFiles: File ;
   hash: string;
   fileName: string;
@@ -37,16 +37,17 @@ export class LandingComponent implements OnInit {
 	async upload(){
       for await (const result of ipfs.add(this.uploadedFiles)){
         this.hash = result.path;
-        console.log(result.path);
+        console.log(this.hash);
       }
 
-      this.http.post("https://a0ab2ae1e208.ngrok.io/insertFileDetails",
+      this.http.post("http://18eab4202061.ngrok.io/insertFileDetails",
       {
-      "fileName": this.uploadedFiles.name ,
-      "fileHash": this.hash
-      })
+      "fileName": "abc.xml",    //this.uploadedFiles.name ,
+      "fileHash": "23423432dhaasjdksajdklasjdkasljdkjsdhjkas"   //this.hash
+      },
+      {responseType: 'text'})
       .subscribe(data  => {
-      console.log("POST Request is successful ", data);
+      console.log(data);
       },
       error  => {
       console.log("Error", error);
@@ -65,15 +66,24 @@ export class LandingComponent implements OnInit {
   async handleUpdate() {
     console.log("update pressed");
 
-    this.http.get<any>('https://a0ab2ae1e208.ngrok.io/viewfileDetails?id=abc.xml').subscribe(data => {
-            this.hash = data.fileHash;
-            this.fileName = data.fileName;
-      }
-    )
+    /*this.http.get<any>('http://18eab4202061.ngrok.io/viewfileDetails?id=abc.xml').toPromise().then(data => {
+
+      console.log(data.fileName);
+      console.log(data.fileHash);
+      this.hash = String(data.fileHash);
+      this.fileName = String(data.fileName);
+    }
+    );*/
+
+    this.data = await this.http.get<any>('http://18eab4202061.ngrok.io/viewfileDetails?id=abc.xml').toPromise();
+    this.hash = this.data.fileHash;
+    this.fileName = this.data.fileName;
+
 
     console.log(this.hash);
+    console.log(this.fileName);
 
-  for await (const file of ipfs.cat(this.hash)){		//hash will be needed from backend
+  /*for await (const file of ipfs.cat(this.hash)){		//hash will be needed from backend
       //console.log(file.content);
       const blob = new Blob([file]);
 
@@ -96,7 +106,7 @@ export class LandingComponent implements OnInit {
       }
 
 
-    }
+    }*/
 
   };
 
