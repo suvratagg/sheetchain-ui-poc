@@ -22,7 +22,7 @@ export class LandingComponent implements OnInit {
   getAPI: string
   showUpload: boolean = false;
   teamname:string = "team";
-  commits:any = ["First commit V1", "Second commit V2", "Third commit V3"];
+  //commits:any = ["First commit V1", "Second commit V2", "Third commit V3"];
 
   fileChange(element) {
     console.log("File Change Achieved");

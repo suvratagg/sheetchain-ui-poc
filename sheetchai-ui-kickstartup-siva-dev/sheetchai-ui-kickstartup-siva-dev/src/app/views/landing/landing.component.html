@@ -3,13 +3,13 @@
     <div class="col-md-4">
       <a routerLink="/team-info/{{teamname}}">
         <!-- <h2>Team {{teamname}}</h2> -->
-        <button type="button" class="btn btn-outline-success" (click)="handleUpdate()">The Team</button>
+        <button type="button" class="btn btn-outline-success" >The Team</button>
       </a>
       <br>
-      <li class="list-group-item">Version History</li>
-      <ul class="list-group" *ngFor="let commit of commits">
-        <li class="list-group-item">{{commit}}</li>
-      </ul>
+      <!-- <li class="list-group-item">Version History</li> -->
+      <!-- <ul class="list-group" *ngFor="let commit of commits"> -->
+        <!-- <li class="list-group-item">{{commit}}</li> -->
+      <!-- </ul> -->
     </div>
 
     <div class="col-md-6">
@@ -18,6 +18,8 @@
           <button type="button" class="btn btn-outline-success" (click)="handleCommit()">Commit File</button>
           &nbsp; &nbsp;
           <button type="button" class="btn btn-outline-success" (click)="handleUpdate()">Update File</button>
+          &nbsp; &nbsp;
+          <button type="button" class="btn btn-outline-success" >Get Details</button>
         </div>
         <br>
         <div class="col-md-8">
