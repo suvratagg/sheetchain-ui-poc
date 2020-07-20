@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'localhost', port: '5001', protocol: 'http' })
+
 
 @Component({
   selector: 'app-landing',
@@ -31,53 +33,47 @@ export class LandingComponent implements OnInit {
   };
 
 
-  /*upload() {
-    console.log("upload pressed");
-  };*/
-
-
 	async upload(){
-      for await (const result of ipfs.add(this.uploadedFiles)){
+    for await (const result of ipfs.add(this.uploadedFiles)){
         this.hash = result.path;
         console.log(this.hash);
-      }
+    }
 
-      this.http.post("http://2310d1426ccd.ngrok.io/insertFileDetails",
+    this.http.post("http://2310d1426ccd.ngrok.io/insertFileDetails",
       {
-      "fileName": this.uploadedFiles.name ,
-      "fileHash": this.hash
+        "fileName": this.uploadedFiles.name ,
+        "fileHash": this.hash
       },
       {responseType: 'text'})
       .subscribe(data  => {
-      console.log(data);
+        console.log(data);
       },
       error  => {
-      console.log("Error", error);
+       console.log("Error", error);
       }
 
-      );
+    );
+      
+    this.fileName = this.uploadedFiles.name;
+     
+    $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Uploaded
+      var modal = $(this)                              //Successfully" if the show event is triggered
+      modal.find('.modal-title').text('File Uploaded Successfully!!')
+    })
 
-      this.fileName = this.uploadedFiles.name;
-      alert(`File Name: ${this.fileName}\nFile Hash: ${this.hash}\nCommitted Successfully!`);
-      //$("#myModal").modal();
+    $('#myModal').modal('show');                    //Triggers the show event
+
+      
   };
 
   handleCommit() {
     console.log("commit pressed");
-    this.showUpload = true;
+    this.showUpload = !(this.showUpload);
   };
 
   async handleUpdate() {
     console.log("update pressed");
-
-    /*this.http.get<any>('http://18eab4202061.ngrok.io/viewfileDetails?id=abc.xml').toPromise().then(data => {
-
-      console.log(data.fileName);
-      console.log(data.fileHash);
-      this.hash = String(data.fileHash);
-      this.fileName = String(data.fileName);
-    }
-    );*/
+    
     this.getAPI = "http://2310d1426ccd.ngrok.io/viewfileDetails?id=" + this.uploadedFiles.name; //change to this.fileName
     console.log(this.getAPI);
     this.data = await this.http.get<any>(this.getAPI).toPromise();
@@ -113,7 +109,13 @@ export class LandingComponent implements OnInit {
 
     }
 
-    alert(`File Name: ${this.fileName}\nDownloaded Successfully!`);
+    $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Downloaded
+      var modal = $(this)                              //Successfully" if the show event is triggered
+      modal.find('.modal-title').text('Downloaded Successfully!!')
+    })
+
+    $('#myModal').modal('show');                    //Triggers the show event
+   
   };
 
 }

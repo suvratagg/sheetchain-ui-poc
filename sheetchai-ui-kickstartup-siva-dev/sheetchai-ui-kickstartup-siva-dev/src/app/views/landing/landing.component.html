@@ -1,20 +1,50 @@
-<div style="margin-left: 150px;margin-right: 150px;">
+<div class="container" >
   <div class="row">
-    <div class="col-md-4">
-      <a routerLink="/team-info/{{teamname}}">
-        <!-- <h2>Team {{teamname}}</h2> -->
-        <button type="button" class="btn btn-outline-success" >The Team</button>
-      </a>
-      <br>
-      <!-- <li class="list-group-item">Version History</li> -->
-      <!-- <ul class="list-group" *ngFor="let commit of commits"> -->
-        <!-- <li class="list-group-item">{{commit}}</li> -->
-      <!-- </ul> -->
+    <!-- <div class="col-md-4"> -->
+      <!-- <a routerLink="/team-info/{{teamname}}"> -->
+        
+        <!-- <button type="button" class="btn btn-outline-success" >The Team</button> -->
+      <!-- </a> -->
+      <!-- <br> -->
+      <!-- <li class="list-group-item">Version History</li> commented earlier -->
+      <!-- <ul class="list-group" *ngFor="let commit of commits"> commented earlier-->
+        <!-- <li class="list-group-item">{{commit}}</li> commented earlier-->
+      <!-- </ul> commented earlier-->
+    <!-- </div> -->
+
+    <!-- <div class="col-9"></div> -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Hey!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>File Name: {{fileName}}</li>
+              <li>File Hash: {{hash}}</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-9">
       <div class="d-flex align-items-end flex-column">
         <div>
+          <a routerLink="/team-info/{{teamname}}">
+            <!-- <h2>Team {{teamname}}</h2> -->
+            <button type="button" class="btn btn-outline-success" >The Team</button>
+          </a>
+          &nbsp; &nbsp;
           <button type="button" class="btn btn-outline-success" (click)="handleCommit()">Commit File</button>
           &nbsp; &nbsp;
           <button type="button" class="btn btn-outline-success" (click)="handleUpdate()">Update File</button>
@@ -22,12 +52,13 @@
           <button type="button" class="btn btn-outline-success" >Get Details</button>
         </div>
         <br>
-        <div class="col-md-8">
+        <div class="col-md-6">
         <div>
-          <div style="width: 600px;" *ngIf="showUpload">
+          <div style="width: 450px; margin: 10px 10px 10px 22px" *ngIf="showUpload">
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text upload" (click)="upload()" id="btnUpload">Upload</span>
+                <button class="btn btn-outline-success" type="button" (click)="upload()">Upload</button>
+                <!-- <span class="input-group-text upload" (click)="upload()" id="btnUpload">Upload</span> -->
               </div>
               <div class="custom-file">
                 <form action="/api/upload" method="post" enctype="multipart/form-data">
@@ -37,7 +68,7 @@
                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
               </div>
             </div>
-          </div>
+        </div>
         </div>
       </div>
       </div>
@@ -47,6 +78,7 @@
       <input class="btn btn-outline-success" type="file" id="commitfile">
     </div>
   </div> -->
+  
   </div>
 </div>
 

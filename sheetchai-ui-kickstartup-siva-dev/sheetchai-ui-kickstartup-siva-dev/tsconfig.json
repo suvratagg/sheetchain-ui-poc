@@ -20,6 +20,6 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
-"types": ["node"]
+"types": ["node", "jquery"]
 
 }
