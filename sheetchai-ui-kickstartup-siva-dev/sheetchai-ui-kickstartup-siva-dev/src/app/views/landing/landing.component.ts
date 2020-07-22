@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 const ipfsClient = require('ipfs-http-client')
-const ipfs = ipfsClient({ host: 'localhost', port: '5001', protocol: 'http' })
+const ipfs = ipfsClient({ host: '13.127.174.142', port: '5001', protocol: 'http' })
 
 
 @Component({
@@ -39,7 +39,7 @@ export class LandingComponent implements OnInit {
         console.log(this.hash);
     }
 
-    this.http.post("http://2310d1426ccd.ngrok.io/insertFileDetails",
+    this.http.post("http://13.127.174.142:8080/insertFileDetails",
       {
         "fileName": this.uploadedFiles.name ,
         "fileHash": this.hash
@@ -74,7 +74,7 @@ export class LandingComponent implements OnInit {
   async handleUpdate() {
     console.log("update pressed");
     
-    this.getAPI = "http://2310d1426ccd.ngrok.io/viewfileDetails?id=" + this.uploadedFiles.name; //change to this.fileName
+    this.getAPI = "http://13.127.174.142:8080/viewfileDetails?id=" + this.uploadedFiles.name; //change to this.fileName
     console.log(this.getAPI);
     this.data = await this.http.get<any>(this.getAPI).toPromise();
     this.hash = this.data.fileHash;
