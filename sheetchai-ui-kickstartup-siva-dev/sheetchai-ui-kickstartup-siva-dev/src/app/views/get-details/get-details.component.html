@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <a routerLink = '/landing'>
+                <button type="button" class="btn btn-outline-success">Back</button>
+            </a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <h3>File List</h3>
+        </div>
+    </div>
+    <br>
+    <div class="row">       <!--File List div-->
+        <div class="col-4">
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">File 1</h5>
+                    <!-- <small>3 days ago</small> -->
+                  </div>
+                  <p>Hash: </p>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">File 2</h5>
+                    <!-- <small>3 days ago</small> -->
+                  </div>
+                  <p>Hash: </p>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">File 3</h5>
+                    <!-- <small>3 days ago</small> -->
+                  </div>
+                  <p>Hash: </p>
+            </a>
+            <!-- <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">File 3</a> -->
+          </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                  File History <br>
+                  <ul>
+                      <li>Clicking on FileName will show this content</li>
+                      <li>As the button is clicked, it will call a function to get the history</li>
+                      <li>When history is retrieved from backend, it will be shown here</li>
+                  </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
