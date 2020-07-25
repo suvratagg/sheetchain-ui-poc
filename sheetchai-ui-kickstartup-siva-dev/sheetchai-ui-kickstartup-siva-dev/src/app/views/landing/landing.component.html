@@ -1,18 +1,5 @@
 <div class="container" >
-  <div class="row">
-    <!-- <div class="col-md-4"> -->
-      <!-- <a routerLink="/team-info/{{teamname}}"> -->
-        
-        <!-- <button type="button" class="btn btn-outline-success" >The Team</button> -->
-      <!-- </a> -->
-      <!-- <br> -->
-      <!-- <li class="list-group-item">Version History</li> commented earlier -->
-      <!-- <ul class="list-group" *ngFor="let commit of commits"> commented earlier-->
-        <!-- <li class="list-group-item">{{commit}}</li> commented earlier-->
-      <!-- </ul> commented earlier-->
-    <!-- </div> -->
-
-    <!-- <div class="col-9"></div> -->
+  <div class="row mt-4 pt-3">
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -36,9 +23,9 @@
         </div>
       </div>
     </div>
-
-    <div class="col-md-9">
-      <div class="d-flex align-items-end flex-column">
+    <div class="col-md-3"></div>
+    <div class="col-md-8 mx-auto">
+      <!-- <div class="d-flex align-items-end flex-column"> -->
         <div>
           <a routerLink="/team-info/{{teamname}}">
             <!-- <h2>Team {{teamname}}</h2> -->
@@ -53,35 +40,39 @@
             <button type="button" class="btn btn-outline-success" >Get Details</button>
           </a>
         </div>
-        <br>
-        <div class="col-md-6">
-        <div>
-          <div style="width: 450px; margin: 10px 10px 10px 22px" *ngIf="showUpload">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-success" type="button" (click)="upload()">Upload</button>
-                <!-- <span class="input-group-text upload" (click)="upload()" id="btnUpload">Upload</span> -->
-              </div>
-              <div class="custom-file">
-                <form action="/api/upload" method="post" enctype="multipart/form-data">
-                  <input (change)="fileChange($event)" type="file" class="custom-file-input" id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01">
-                </form>
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-              </div>
-            </div>
-        </div>
-        </div>
-      </div>
-      </div>
+        
+      <!-- </div> -->
     </div>
-    <!-- <div align="right" id="uploadfinalfile" style="display: none;">
-    <div class="form-group">
-      <input class="btn btn-outline-success" type="file" id="commitfile">
-    </div>
-  </div> -->
   
   </div>
+
+  <div class="row mt-3 pt-3">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 ml-3">
+      <div>
+        <div  *ngIf="showUpload">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-success" type="button" (click)="upload()">Upload</button>
+              <!-- <span class="input-group-text upload" (click)="upload()" id="btnUpload">Upload</span> -->
+            </div>
+            <div class="custom-file">
+              <form action="/api/upload" method="post" enctype="multipart/form-data">
+                <input (change)="fileChange($event)" type="file" class="custom-file-input" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01">
+              </form>
+              
+                <label class="custom-file-label" for="inputGroupFile01" >
+                  <span id="fileInput" class="d-inline-block text-truncate" style="max-width: 80%;">Choose file</span>
+                  
+                </label>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 

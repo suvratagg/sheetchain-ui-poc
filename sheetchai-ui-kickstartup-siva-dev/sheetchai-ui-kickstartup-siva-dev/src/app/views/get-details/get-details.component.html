@@ -13,44 +13,89 @@
         </div>
     </div>
     <br>
-    <div class="row">       <!--File List div-->
-        <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">File 1</h5>
-                    <!-- <small>3 days ago</small> -->
-                  </div>
-                  <p>Hash: </p>
-            </a>
-            <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">File 2</h5>
-                    <!-- <small>3 days ago</small> -->
-                  </div>
-                  <p>Hash: </p>
-            </a>
-            <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">File 3</h5>
-                    <!-- <small>3 days ago</small> -->
-                  </div>
-                  <p>Hash: </p>
-            </a>
-            <!-- <a class="list-group-item list-group-item-action list-group-item-success" id="list-home-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">File 3</a> -->
+    
+
+    <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">File Name</th>
+            <th scope="col">File Hash</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor ="let file of files">
+            <td>{{file.fileName}}</td>
+            <td>{{file.fileHash}}</td>
+            <td>
+                <button type="button" class="btn btn-outline-success btn-sm mr-1" (click)="download(file.fileName)">Download</button>
+                <button type="button" class="btn btn-outline-success btn-sm" (click)="getHistory(file.fileName)">View History</button>
+            </td>
+          </tr>
+          
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Hey!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>File Name: {{fileName}}</li>
+              <!-- <li>File Hash: {{fileHash}}</li> -->
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            
           </div>
         </div>
-        <div class="col-8">
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                  File History <br>
-                  <ul>
-                      <li>Clicking on FileName will show this content</li>
-                      <li>As the button is clicked, it will call a function to get the history</li>
-                      <li>When history is retrieved from backend, it will be shown here</li>
-                  </ul>
-              </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="modal fade" id="myModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">File Hash</th>
+                  <th scope="col">TimeStamp</th>
+                  <th scope="col">Txn ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ="let _ of history; let i=index">
+                  <ng-container *ngIf="history[history.length-i-1] as element">
+                  <!-- <td style="word-wrap: break-word;min-width: 190px;max-width: 190px;white-space:normal;">{{element.fileDetails.fileName}}</td> -->
+                  <td style="word-wrap: break-word;min-width: 190px;max-width: 190px;white-space:normal;">{{element.fileDetails.fileHash}}</td>
+                  <td style="word-wrap: break-word;min-width: 190px;max-width: 190px;white-space:normal;">{{element.timestampDate}}</td>
+                  <td style="word-wrap: break-word;min-width: 190px;max-width: 200px;white-space:normal;">{{element.transactionId}}</td>
+                </ng-container>
+                </tr>
+                
+              </tbody>
+          </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
