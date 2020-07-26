@@ -3,8 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: '15.207.86.202', port: '5001', protocol: 'http' })
-import {map} from "rxjs/operators";
-import {catchError} from "rxjs/operators";
+const toBuffer = require('it-to-buffer')
 
 import { File } from './file'
 import { txnHistory } from "./file";
@@ -25,36 +24,35 @@ export class MyService {
     console.log("update pressed");
     this.fileName =  name;
     this.getAPI = "http://13.235.242.112:8080/viewfileDetails?id=" + this.fileName; //change to this.fileName
+    
     console.log(this.getAPI);
+    
     this.data = await this.http.get<any>(this.getAPI).toPromise();
     //this.hash = this.data.fileHash;
     this.fileName = this.data.fileName;
 
     console.log(this.fileName);
 
-    for await (const file of ipfs.cat(this.data.fileHash)){		//hash will be needed from backend
-      
-      const blob = new Blob([file]);
+    const file = await toBuffer(ipfs.cat(this.data.fileHash));
 
-      const nameOfFile = this.fileName; 	//filename is taken from get request
-      if (navigator.msSaveBlob) {
-        // IE 10+
+    const blob = new Blob([file]);
+
+    const nameOfFile = this.fileName; 	//filename is taken from get request
+    if (navigator.msSaveBlob) {
+      // IE 10+
       navigator.msSaveBlob(blob, nameOfFile);
-      } else {
-        const link = document.createElement('a');
+    } else {
+      const link = document.createElement('a');
       // Browsers that support HTML5 download attribute
-        if (link.download !== undefined) {
-          const url = URL.createObjectURL(blob);
-          link.setAttribute('href', url);
-          link.setAttribute('download', nameOfFile);
-          link.style.visibility = 'hidden';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', nameOfFile);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
-
-
     }
 
     $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Downloaded

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: '15.207.86.202', port: '5001', protocol: 'http' })
-
+const toBuffer = require('it-to-buffer')
 
 @Component({
   selector: 'app-landing',
@@ -86,30 +86,32 @@ export class LandingComponent implements OnInit {
     console.log(this.hash);
     console.log(this.fileName);
 
-    for await (const file of ipfs.cat(this.hash)){		//hash will be needed from backend
+    
       //console.log(file.content);
-      const blob = new Blob([file]);
+    const file = await toBuffer(ipfs.cat(this.hash));
 
-      const nameOfFile = this.fileName; 	//filename is taken from get request
-      if (navigator.msSaveBlob) {
-        // IE 10+
+    const blob = new Blob([file]);
+
+    const nameOfFile = this.fileName; 	//filename is taken from get request
+    if (navigator.msSaveBlob) {
+      // IE 10+
       navigator.msSaveBlob(blob, nameOfFile);
-      } else {
-        const link = document.createElement('a');
+    } else {
+      const link = document.createElement('a');
       // Browsers that support HTML5 download attribute
-        if (link.download !== undefined) {
-          const url = URL.createObjectURL(blob);
-          link.setAttribute('href', url);
-          link.setAttribute('download', nameOfFile);
-          link.style.visibility = 'hidden';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', nameOfFile);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
-
-
     }
+
+
+  
 
     $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Downloaded
       var modal = $(this)                              //Successfully" if the show event is triggered
