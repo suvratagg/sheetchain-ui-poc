@@ -87,7 +87,7 @@ export class LandingComponent implements OnInit {
     console.log(this.fileName);
 
     
-      //console.log(file.content);
+    //console.log(file.content);
     const file = await toBuffer(ipfs.cat(this.hash));
 
     const blob = new Blob([file]);
