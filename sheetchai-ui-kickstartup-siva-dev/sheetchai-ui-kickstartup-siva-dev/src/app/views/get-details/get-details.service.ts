@@ -21,6 +21,7 @@ export class MyService {
   }
 
   async handleUpdate(name) {
+    
     console.log("update pressed");
     this.fileName =  name;
     this.getAPI = "http://13.235.242.112:8080/viewfileDetails?id=" + this.fileName; //change to this.fileName
@@ -55,12 +56,7 @@ export class MyService {
       }
     }
 
-    $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Downloaded
-       var modal = $(this)                              //Successfully" if the show event is triggered
-       modal.find('.modal-title').text('Downloaded Successfully!!')
-     })
-
-     $('#myModal').modal('show');                    //Triggers the show event
+    
    
   };
 

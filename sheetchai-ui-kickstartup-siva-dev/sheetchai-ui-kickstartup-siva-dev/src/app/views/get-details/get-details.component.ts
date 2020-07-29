@@ -20,10 +20,12 @@ export class GetDetailsComponent implements OnInit {
   files: File[] ;
   history: txnHistory[];
   fileName: string;
+  isLoading: boolean;
 
-  getFiles():void {
-    this.myService.getFileList()
-        .subscribe(
+  async getFiles() {
+    this.isLoading = true;
+    await this.myService.getFileList().toPromise()
+        .then(
             files => {
               this.files = files;
               console.log(this.files[0].fileName);
@@ -33,7 +35,7 @@ export class GetDetailsComponent implements OnInit {
               console.log(err);
             }
         )
-
+    this.isLoading = false;        
   }
 
   ngOnInit(): void {
@@ -41,16 +43,26 @@ export class GetDetailsComponent implements OnInit {
   }
 
   
-  download(name): void {
+  async download(name) {
+    this.isLoading = true;
     console.log(name);
     this.fileName = name;
-    this.myService.handleUpdate(name);
+    await this.myService.handleUpdate(name);
+    this.isLoading = false;
+    $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Downloaded
+       var modal = $(this)                              //Successfully" if the show event is triggered
+       modal.find('.modal-title').text('Downloaded Successfully!!')
+     })
+
+     $('#myModal').modal('show');                    //Triggers the show event
   }
 
-  getHistory(name): void {
+  async getHistory(name) {
+    this.isLoading = true;
+    this.history = [];
     this.fileName = name;
-    this.myService.viewHistory(name)
-        .subscribe(
+    await this.myService.viewHistory(name).toPromise()
+        .then(
         element => {
           this.history = element;
           console.log(this.history[0]);
@@ -62,7 +74,7 @@ export class GetDetailsComponent implements OnInit {
         )
 
     
-
+      this.isLoading = false;
     $('#myModalLong').on('show.bs.modal', function () {    //this sets the title to "Downloaded
         var modal = $(this)                              //Successfully" if the show event is triggered
         modal.find('.modal-title').text(name)
