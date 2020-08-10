@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <a routerLink = '/landing'>
-                <button type="button" class="btn btn-outline-success">Back</button>
-            </a>
+            <!-- <a routerLink = '/landing'> -->
+                <button type="button" class="btn btn-outline-success" (click)="goToLanding()">Back</button>
+            <!-- </a> -->
         </div>
     </div>
     <br>
@@ -86,17 +86,20 @@
               <thead>
                 <tr>
                   <th scope="col">File Hash</th>
+                  <th scope="col">User</th>
                   <th scope="col">TimeStamp</th>
                   <th scope="col">Txn ID</th>
+                  
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor ="let _ of history; let i=index">
                   <ng-container *ngIf="history[history.length-i-1] as element">
                   <!-- <td style="word-wrap: break-word;min-width: 190px;max-width: 190px;white-space:normal;">{{element.fileDetails.fileName}}</td> -->
-                  <td style="word-wrap: break-word;max-width: 285px;white-space:normal;">{{element.fileDetails.fileHash}}</td>
+                  <td style="word-wrap: break-word;max-width: 260px;white-space:normal;">{{element.fileDetails.fileHash}}</td>
+                  <td style="word-wrap: break-word;max-width: 285px;white-space:normal;">{{element.fileDetails.userName}}</td>
                   <td style="word-wrap: break-word;max-width: 285px;white-space:normal;">{{element.timestampDate}}</td>
-                  <td style="word-wrap: break-word;max-width: 298px;white-space:normal;">{{element.transactionId}}</td>
+                  <td style="word-wrap: break-word;max-width: 260px;white-space:normal;">{{element.transactionId}}</td>
                 </ng-container>
                 </tr>
                 

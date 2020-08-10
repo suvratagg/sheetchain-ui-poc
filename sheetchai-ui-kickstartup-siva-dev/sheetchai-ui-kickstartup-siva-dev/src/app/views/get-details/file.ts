@@ -1,6 +1,7 @@
 export interface File{
     fileName: string;
     fileHash: string;
+    userName: string;
 }
 
 export interface txnHistory{
@@ -8,5 +9,4 @@ export interface txnHistory{
     fileDetails: File;
     timestampDate: string;
     transactionId: string;
-  
 }

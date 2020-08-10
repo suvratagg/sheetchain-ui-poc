@@ -1,0 +1,16 @@
+.card {
+    margin-left: 35%;
+    margin-top: 3.2%;
+    width: 30%;
+    height: 30%;
+}
+
+.card-body {
+    padding-top: 3rem;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.registerUser{
+    height: 300px;
+}
