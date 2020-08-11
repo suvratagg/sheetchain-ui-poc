@@ -72,18 +72,18 @@ export class LandingComponent implements OnInit {
       .then(data  => {
         console.log(data);
         $('#myModal').on('show.bs.modal', function () {               //this sets the title to "Uploaded
-        var modal = $(this)                                          //Successfully" if the show event is triggered
-        modal.find('.modal-title').text('File Uploaded Successfully!!')
+          var modal = $(this)                                          //Successfully" if the show event is triggered
+          modal.find('.modal-title').text('File Uploaded Successfully!!')
         })
       },
       error  => {
-      console.log("Error", error);
-      $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Not uploaded
-      var modal = $(this)                              // if the show event is triggered
-      modal.find('.modal-title').text('File Not Uploaded!')
-      modal.find('.modal-body-text').text('Please download the latest version of the file first')
+        console.log("Error", error);
+        $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Not uploaded
+          var modal = $(this)                              // if the show event is triggered
+          modal.find('.modal-title').text('File Not Uploaded!')
+          modal.find('.modal-body-text').text('Please download the latest version of the file first')
 
-    })
+        })
       }
 
     );
