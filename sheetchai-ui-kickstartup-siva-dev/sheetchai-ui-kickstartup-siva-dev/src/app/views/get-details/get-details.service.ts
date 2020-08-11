@@ -20,8 +20,8 @@ export class MyService {
     return this.http.get<File[]>('http://13.235.242.112:8080/fetchFileDetails');
   }
 
-  async handleUpdate(name) {
-    
+  async handleUpdate(name: string, username: string) {
+    //console.log(username);
     console.log("update pressed");
     this.fileName =  name;
     this.getAPI = "http://13.235.242.112:8080/viewfileDetails?id=" + this.fileName; //change to this.fileName
@@ -35,6 +35,25 @@ export class MyService {
     console.log(this.fileName);
 
     const file = await toBuffer(ipfs.cat(this.data.fileHash));
+
+    //save hash details with user
+    await this.http.post("http://13.235.242.112:8080/saveHashDetails",
+      {
+        "fileHashPK":{
+          "username": username,
+          "fileName": name
+        },
+        "fileHash": this.data.fileHash
+      },
+      {responseType: 'text'}).toPromise()
+      .then(data  => {
+        console.log(data);
+      },
+      error  => {
+      console.log("Error", error);
+      }
+
+    );
 
     const blob = new Blob([file]);
 
@@ -60,7 +79,7 @@ export class MyService {
    
   };
 
-  viewHistory(name): Observable<txnHistory[]> {
+  viewHistory(name: string): Observable<txnHistory[]> {
 
     this.fileName =  name;
     this.getAPI = "http://13.235.242.112:8080/getTxnHistory?id=" + this.fileName;

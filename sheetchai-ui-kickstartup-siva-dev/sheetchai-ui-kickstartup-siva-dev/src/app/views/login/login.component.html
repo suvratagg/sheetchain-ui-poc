@@ -2,7 +2,7 @@
 <div class="card" *ngIf="showLogin">
     <!-- <img class="card-img-top" src="../../../assets/full_logo.PNG" alt="Card image cap"> -->
     <div class="card-body">
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (keyup.enter)="login()">
         <div class="form-group" align="center">
           <label>
             <b>Username: - </b>
@@ -16,7 +16,7 @@
           <input formControlName="password" type="password" />
         </div>
         <div class="form-group" align="center">
-          <button type="button" class="btn btn-success btn-md" (click)="login()">
+          <button type="button" class="btn btn-success btn-md" (click)="login()" >
             <b>Login</b>
           </button> 
         </div>
@@ -40,7 +40,7 @@
       <!-- <img class="card-img-top" src="../../../assets/full_logo.PNG" alt="Card image cap"> -->
     <!-- </div> -->
     <div class="card-body">
-      <form [formGroup]="registerForm">
+      <form [formGroup]="registerForm" (keyup.enter)="saveUser()">
         <br>
         <div class="form-group" align="center">
           <label>
@@ -93,7 +93,7 @@
           <button type="submit" (click)="backToLogin()" class="btn btn-success">
             <b>Back To Login</b>
           </button> &nbsp;
-          <button type="submit" (click)="saveUser()" class="btn btn-success">
+          <button type="submit" (click)="saveUser()" (keyup.enter)="saveUser()" class="btn btn-success">
             <b>Register</b>
           </button>
         </div>

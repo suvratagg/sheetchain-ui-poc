@@ -47,8 +47,8 @@ export class GetDetailsComponent implements OnInit {
       this.val = params;
     });
 
-    this.userName = this.val.userName;
-
+    this.userName = this.val.username;
+    console.log(this.userName)
     this.getFiles();          //everytime the component is loaded the list of files is retrieved
   }
 
@@ -56,8 +56,9 @@ export class GetDetailsComponent implements OnInit {
   async download(name) {
     this.isLoading = true;
     console.log(name);
+    console.log(this.userName);
     this.fileName = name;
-    await this.myService.handleUpdate(name);
+    await this.myService.handleUpdate(name, this.userName);
     this.isLoading = false;
     $('#myModal').on('show.bs.modal', function () {    //this sets the title to "Downloaded
        var modal = $(this)                              //Successfully" if the show event is triggered

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { Router } from '@angular/router';
 
 import { UserServiceService } from '../../user-service.service'
@@ -60,9 +60,10 @@ export class LoginComponent implements OnInit {
   login() {
     const request = this.loginForm.get('username').value;
     if ((request === null) || (request === '')) {
-      swal({
-        type: 'error',
-        title: 'Please Enter Details To Continue'
+      Swal.fire({
+        icon: 'error',
+        title: 'Enter All Details!'
+        //text: 'Something went wrong!'
       })
     } else {
       this.userService.getUserName(request).subscribe(data => {
@@ -88,15 +89,15 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('logIn', data.username);
               // }
             } else {
-              swal({
-                type: 'error',
+              Swal.fire({
+                icon: 'error',
                 title: 'Incorrect Password'
               })
             }
           });
         } else {
-          swal({
-            type: 'error',
+          Swal.fire({
+            icon: 'error',
             title: 'User Does Not Exist'
           })
         }
@@ -125,16 +126,16 @@ export class LoginComponent implements OnInit {
     if ((request.firstName === null) || (request.firstName === '') || (request.lastName === null) ||
       (request.lastName === '') || (request.username === null) || (request.username === '') || (request.password === null)
       || (request.password === '') || (request.userType === null)) {
-      swal({
-        type: 'error',
+      Swal.fire({
+        icon: 'error',
         title: 'Please Enter All The Details'
       })
     } else {
       const uname = request.username;
       this.userService.getUserName(uname).subscribe(data => {
         if (data) {
-          swal({
-            type: 'error',
+          Swal.fire({
+            icon: 'error',
             title: 'Username Already Exists'
           })
         } else {
@@ -146,6 +147,11 @@ export class LoginComponent implements OnInit {
               delete request.lastName;
               delete request.userType;
               delete request.email;
+              Swal.fire({
+                icon: 'success',
+                title: 'Registered Successfully!!',
+                text: 'Please Login with your credentials.'
+              })
               this.backToLogin();     
           })
         }
