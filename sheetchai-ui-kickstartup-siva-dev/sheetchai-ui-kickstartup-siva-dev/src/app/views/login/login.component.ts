@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
 
 
     this.loginForm = this.formBuilder.group({
-      username: new FormControl(),
-      password: new FormControl()
+      username: new FormControl('', Validators.required),
+      password: new FormControl('')
     });
 
     this.showLogin = true;
@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
   // login button 
   login() {
     const request = this.loginForm.get('username').value;
-    if ((request === null) || (request === '')) {
+    const req = this.loginForm.get('password').value;
+    if ((request === null) || (request === '') || (req === null) || (req === '')) {
       Swal.fire({
         icon: 'error',
         title: 'Enter All Details!'
@@ -68,7 +69,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.userService.getUserName(request).subscribe(data => {
         if (data) {
-          const req = this.loginForm.get('password').value;
+          
           this.userService.getPassword(req).subscribe(data => {
             if (data) {
               // if (data.userType === "Admin") {
@@ -103,6 +104,7 @@ export class LoginComponent implements OnInit {
         }
       })
     }
+    this.loginForm.reset();
   }
 
   // open register new user form
@@ -152,11 +154,14 @@ export class LoginComponent implements OnInit {
                 title: 'Registered Successfully!!',
                 text: 'Please Login with your credentials.'
               })
+
               this.backToLogin();     
           })
         }
       });
     }
+
+    this.registerForm.reset();
   }
 
   

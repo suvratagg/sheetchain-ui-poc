@@ -2,7 +2,7 @@
 <div class="card" *ngIf="showLogin">
     <!-- <img class="card-img-top" src="../../../assets/full_logo.PNG" alt="Card image cap"> -->
     <div class="card-body">
-      <form [formGroup]="loginForm" (keyup.enter)="login()">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="form-group" align="center">
           <label>
             <b>Username: - </b>
@@ -40,7 +40,7 @@
       <!-- <img class="card-img-top" src="../../../assets/full_logo.PNG" alt="Card image cap"> -->
     <!-- </div> -->
     <div class="card-body">
-      <form [formGroup]="registerForm" (keyup.enter)="saveUser()">
+      <form [formGroup]="registerForm" (ngSubmit)="saveUser()">
         <br>
         <div class="form-group" align="center">
           <label>
@@ -93,7 +93,7 @@
           <button type="submit" (click)="backToLogin()" class="btn btn-success">
             <b>Back To Login</b>
           </button> &nbsp;
-          <button type="submit" (click)="saveUser()" (keyup.enter)="saveUser()" class="btn btn-success">
+          <button type="submit" (click)="saveUser()" class="btn btn-success">
             <b>Register</b>
           </button>
         </div>
